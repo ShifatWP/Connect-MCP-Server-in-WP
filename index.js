@@ -4,8 +4,8 @@ import fetch from "node-fetch";
 import { z } from "zod";
 
 const WP_BASE = "https://your-site.com/wp-json/wp/v2"; // The rest api URL.
-const WP_USER = "shifat";// The user name.
-const WP_APP_PASSWORD = "E25R JWu5 TQnt 6msJ ToXS KAGN"; // Wodpress application password.
+const WP_USER = "username";// The user name.
+const WP_APP_PASSWORD = "pass"; // Wodpress application password.
 
 // Base64 auth header for WordPress Basic Auth
 const authHeader = "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
