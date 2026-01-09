@@ -3,9 +3,9 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import fetch from "node-fetch";
 import { z } from "zod";
 
-const WP_BASE = "https://shifat.thdevs.com/wp-json/wp/v2";
-const WP_USER = "shifat";
-const WP_APP_PASSWORD = "E25R JWu5 TQnt 6msJ ToXS KAGN";
+const WP_BASE = "https://your-site.com/wp-json/wp/v2"; // The rest api URL.
+const WP_USER = "shifat";// The user name.
+const WP_APP_PASSWORD = "E25R JWu5 TQnt 6msJ ToXS KAGN"; // Wodpress application password.
 
 // Base64 auth header for WordPress Basic Auth
 const authHeader = "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
@@ -83,61 +83,4 @@ server.registerTool(
 // Connect server via STDIO (used by Claude Desktop)
 await server.connect(new StdioServerTransport());
 console.error("✅ WordPress MCP Server running...");
-
-// import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-// import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-// import fetch from "node-fetch";
-
-// const WP_BASE = "https://shifat.thdevs.com/wp-json/wp/v2";
-// const WP_USER = "shifat";
-// const WP_APP_PASSWORD = "E25R JWu5 TQnt 6msJ ToXS KAGN";
-
-// const authHeader =
-//   "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
-
-// // Create MCP server and define tools in constructor
-// const server = new McpServer({
-//   name: "wordpress-mcp",
-//   version: "1.0.0",
-//   tools: {
-//     create_post: {
-//       description: "Create a new WordPress post",
-//       inputSchema: {
-//         type: "object",
-//         properties: {
-//           title: { type: "string" },
-//           content: { type: "string" },
-//           status: { type: "string", enum: ["draft", "publish"], default: "publish" },
-//         },
-//         required: ["title", "content"],
-//       },
-//       handler: async ({ title, content, status = "publish" }) => {
-//         const res = await fetch(`${WP_BASE}/posts`, {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//             Authorization: authHeader,
-//           },
-//           body: JSON.stringify({ title, content, status }),
-//         });
-
-//         const data = await res.json();
-
-//         return {
-//           content: [
-//             {
-//               type: "text",
-//               text: `✅ Post created successfully!\nID: ${data.id}\nLink: ${data.link}`,
-//             },
-//           ],
-//         };
-//       },
-//     },
-//   },
-// });
-
-// // Connect server via STDIO for Claude
-// await server.connect(new StdioServerTransport());
-
-// console.error("✅ WordPress MCP Server running...");
 
